@@ -52,9 +52,9 @@ class TraineesController extends Controller
         $paid_employees = DB::table('trainees')->where('status','paid')->count();
         $pending_employees = DB::table('trainees')->where('status','pending')->count();
 
-        $female_employees = DB::table('trainees')->where('gender','Female')->count();
-        $male_employees   = DB::table('trainees')->where('gender','Male')->count();
-        return view('admin_pages.dashboard',compact('trainees','paid_employees','pending_employees','female_employees','male_employees'));
+        $suspended_employees = DB::table('trainees')->where('status','suspended')->count();
+        $trainees_count   = DB::table('trainees')->count();
+        return view('admin_pages.dashboard',compact('trainees','paid_employees','pending_employees','suspended_employees','trainees_count'));
     }
     /**
      * A trainee is a person who has created an account with us.

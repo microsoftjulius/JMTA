@@ -52,29 +52,31 @@
                 </tfoot>
                 <tbody>
                     @foreach ($trainees as $trainee)
-                        <tr>
-                            @if($trainee->status == 'paid')
-                            <th><button class="btn btn-sm btn-warning">Suspend</button></th>
-                            @else
-                            <th><button class="btn btn-sm btn-success">Approve</button></th>
-                            @endif
-                            <th>{{ $trainee->first_name }} {{ $trainee->last_name }}</th>
-                            <th>{{ $trainee->gender }}</th>
-                            <th>{{ $trainee->email_address }}</th>
-                            <th>{{ $trainee->date_of_birth }}</th>
-                            <th>{{ $trainee->nationality }}</th>
-                            <th>{{ $trainee->country }}</th>
-                            <th>{{ $trainee->status }}</th>
-                            <th>{{ $trainee->city }}</th>
-                            <th>{{ $trainee->phone_number }}</th>
-                            <th>{{ $trainee->marital_status }}</th>
-                            <th>{{ $trainee->denomination }}</th>
-                            <th>{{ $trainee->ministry }}</th>
-                            <th>{{ $trainee->local_church }}</th>
-                            <th>{{ $trainee->profession }}</th>
-                            <th>{{ $trainee->occupation }}</th>
-                            <th>{{ $trainee->payment_method }}</th>
-                        </tr>
+                    <tr>
+                        @if($trainee->status == 'paid')
+                        <td><a href="/suspend-trainee/{{ $trainee->id }}"><button class="btn btn-sm btn-warning">Suspend</button></a></td>
+                        @elseif($trainee->status == 'suspended')
+                        <td><a href="/approve-trainee/{{ $trainee->id }}"><button class="btn btn-sm btn-success">Activate</button></a></td>
+                        @else
+                        <td><a href="/approve-trainee/{{ $trainee->id }}"><button class="btn btn-sm btn-info">Approve</button></a></td>
+                        @endif
+                        <td>{{ $trainee->first_name }} {{ $trainee->last_name }}</td>
+                        <td>{{ $trainee->gender }}</td>
+                        <td>{{ $trainee->email_address }}</td>
+                        <td>{{ $trainee->date_of_birth }}</td>
+                        <td>{{ $trainee->nationality }}</td>
+                        <td>{{ $trainee->country }}</td>
+                        <td>{{ $trainee->status }}</td>
+                        <td>{{ $trainee->city }}</td>
+                        <td>{{ $trainee->phone_number }}</td>
+                        <td>{{ $trainee->marital_status }}</td>
+                        <td>{{ $trainee->denomination }}</td>
+                        <td>{{ $trainee->ministry }}</td>
+                        <td>{{ $trainee->local_church }}</td>
+                        <td>{{ $trainee->profession }}</td>
+                        <td>{{ $trainee->occupation }}</td>
+                        <td>{{ $trainee->payment_method }}</td>
+                    </tr>
                     @endforeach
                 </tbody>
                 </table>

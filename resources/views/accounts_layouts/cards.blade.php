@@ -39,15 +39,15 @@
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Number Of females</div>
+                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Suspended Employees</div>
                     <div class="row no-gutters align-items-center">
                     <div class="col-auto">
-                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ $female_employees }}</div>
+                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ $suspended_employees }}</div>
                     </div>
                     </div>
                 </div>
                 <div class="col-auto">
-                    <i class="fa fa-female fa-2x text-gray-300"></i>
+                    <i class="fa fa-pause fa-2x text-gray-300"></i>
                 </div>
                 </div>
             </div>
@@ -60,11 +60,11 @@
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Number of Males</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $male_employees }}</div>
+                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total Number</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $trainees_count }}</div>
                 </div>
                 <div class="col-auto">
-                    <i class="fa fa-male fa-2x text-gray-300"></i>
+                    <i class="fa fa-calculator fa-2x text-gray-300"></i>
                 </div>
                 </div>
             </div>

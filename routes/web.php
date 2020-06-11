@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/dashboard','TraineesController@getAllTrainees');
-
+Route::get('/suspend-trainee/{id}','TraineesController@suspendTrainee');
+Route::get('/approve-trainee/{id}','TraineesController@activateTrainee');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
