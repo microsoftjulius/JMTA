@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/dashboard','TraineesController@getAllTrainees');
 Route::get('/suspend-trainee/{id}','TraineesController@suspendTrainee');
 Route::get('/approve-trainee/{id}','TraineesController@activateTrainee');
+Route::get('/',function(){
+    return redirect('/dashboard');
+});
+Route::get('export', 'TraineesController@export');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

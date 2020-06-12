@@ -8,6 +8,8 @@ use App\Content;
 use Auth;
 use DB;
 use App\Courses;
+use App\Exports\TraineeExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TraineesController extends Controller
 {
@@ -93,6 +95,14 @@ class TraineesController extends Controller
         $email = Trainee::where('id',$id)->value('email_address');
         // $this->email_function->basic_email($email);
         return redirect()->back()->with('message','A trainee has been Activated Successfully and notified via email');
+    }
+
+    /**
+     * Function to export the trainees to excell
+     */
+    public function export() 
+    {
+        return Excel::download(new TraineeExport, 'trainees.xlsx');
     }
     /**
      * A trainee can be suspended.

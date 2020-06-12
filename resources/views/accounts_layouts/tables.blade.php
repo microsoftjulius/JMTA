@@ -1,5 +1,17 @@
 <link href="{{ asset('adminNew/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
 
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+</style>
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -7,8 +19,8 @@
             </div>
             <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
+                <table class="table table-bordered responsive nowrap" id="dataTable" width="100%" cellspacing="0" >
+                <thead class="table thead-light" style="text-transform:uppercase">
                     <tr>
                     <th>Options</th>
                     <th>Names</th>
@@ -29,27 +41,27 @@
                     <th>Payment Method</th>
                     </tr>
                 </thead>
-                <tfoot>
-                    <tr>
-                        <th>Options</th>
-                        <th>Names</th>
-                        <th>Gender</th>
-                        <th>Email</th>
-                        <th>Date Of Birth</th>
-                        <th>Nationality</th>
-                        <th>Country</th>
-                        <th>Status</th>
-                        <th>City</th>
-                        <th>Phone Number</th>
-                        <th>Marital Status</th>
-                        <th>Denomination</th>
-                        <th>Ministry</th>
-                        <th>Local Church</th>
-                        <th>Profession</th>
-                        <th>Occupation</th>
-                        <th>Payment Method</th>
-                    </tr>
-                </tfoot>
+                <!--<tfoot>-->
+                <!--    <tr>-->
+                <!--        <th>Options</th>-->
+                <!--        <th>Names</th>-->
+                <!--        <th>Gender</th>-->
+                <!--        <th>Email</th>-->
+                <!--        <th>Date Of Birth</th>-->
+                <!--        <th>Nationality</th>-->
+                <!--        <th>Country</th>-->
+                <!--        <th>Status</th>-->
+                <!--        <th>City</th>-->
+                <!--        <th>Phone Number</th>-->
+                <!--        <th>Marital Status</th>-->
+                <!--        <th>Denomination</th>-->
+                <!--        <th>Ministry</th>-->
+                <!--        <th>Local Church</th>-->
+                <!--        <th>Profession</th>-->
+                <!--        <th>Occupation</th>-->
+                <!--        <th>Payment Method</th>-->
+                <!--    </tr>-->
+                <!--</tfoot>-->
                 <tbody>
                     @foreach ($trainees as $trainee)
                     <tr>
@@ -58,7 +70,7 @@
                         @elseif($trainee->status == 'suspended')
                         <td><a href="/approve-trainee/{{ $trainee->id }}"><button class="btn btn-sm btn-success">Activate</button></a></td>
                         @else
-                        <td><a href="/approve-trainee/{{ $trainee->id }}"><button class="btn btn-sm btn-info">Approve</button></a></td>
+                        <td><a href="/approve-trainee/{{ $trainee->id }}"><button class="btn btn-sm btn-primary">Approve</button></a></td>
                         @endif
                         <td>{{ $trainee->first_name }} {{ $trainee->last_name }}</td>
                         <td>{{ $trainee->gender }}</td>
@@ -79,6 +91,9 @@
                     </tr>
                     @endforeach
                 </tbody>
+                <div id="toolbar">
+                    <button id="export" class="btn btn-sm btn-primary">Export</button>
+                </div>
                 </table>
             </div>
             </div>
