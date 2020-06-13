@@ -25,6 +25,10 @@ Route::get('export', 'TraineesController@export');
 Route::get('/course-contents',function(){
     return view('admin_pages.course_contents');
 })->name("Course Content");
+Route::get('/settings',function(){
+    $all_users = DB::table('users')->get();
+    return view('admin_pages.settings',compact('all_users'));
+})->name("Settings");
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

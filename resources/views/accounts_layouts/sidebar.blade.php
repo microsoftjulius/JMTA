@@ -31,7 +31,7 @@
         <i class="fa fa-folder"></i>
         <span>Course Contents</span></a>
     </li>
-    <li class="nav-item">
+    <li @if(request()->route()->getName() == "Settings") class="nav-item active" @else class="nav-item" @endif>
         <a class="nav-link" href="/settings">
         <i class="fa fa-cogs"></i>
         <span>Settings</span></a>

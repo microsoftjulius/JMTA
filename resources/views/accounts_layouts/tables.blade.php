@@ -13,6 +13,7 @@ th, td {
 tr:nth-child(even) {background-color: #f2f2f2;}
 </style>
         <!-- DataTales Example -->
+        @if(request()->route()->getName() == "Dashboard")
         <div class="card shadow mb-4">
             <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">List of all Trainees</h6>
@@ -41,27 +42,6 @@ tr:nth-child(even) {background-color: #f2f2f2;}
                     <th>Payment Method</th>
                     </tr>
                 </thead>
-                <!--<tfoot>-->
-                <!--    <tr>-->
-                <!--        <th>Options</th>-->
-                <!--        <th>Names</th>-->
-                <!--        <th>Gender</th>-->
-                <!--        <th>Email</th>-->
-                <!--        <th>Date Of Birth</th>-->
-                <!--        <th>Nationality</th>-->
-                <!--        <th>Country</th>-->
-                <!--        <th>Status</th>-->
-                <!--        <th>City</th>-->
-                <!--        <th>Phone Number</th>-->
-                <!--        <th>Marital Status</th>-->
-                <!--        <th>Denomination</th>-->
-                <!--        <th>Ministry</th>-->
-                <!--        <th>Local Church</th>-->
-                <!--        <th>Profession</th>-->
-                <!--        <th>Occupation</th>-->
-                <!--        <th>Payment Method</th>-->
-                <!--    </tr>-->
-                <!--</tfoot>-->
                 <tbody>
                     @foreach ($trainees as $trainee)
                     <tr>
@@ -98,3 +78,59 @@ tr:nth-child(even) {background-color: #f2f2f2;}
             </div>
             </div>
         </div>
+        @endif
+
+        @if(request()->route()->getName() == "Settings")
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">List of all Users</h6>
+            </div>
+            <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered responsive nowrap" id="dataTable" width="100%" cellspacing="0" >
+                <thead class="table thead-light" style="text-transform:uppercase">
+                    <tr>
+                        <th>Name(s)</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($all_users as $users)
+                    <tr>
+                        <td>{{ $users->name }}</td>
+                        <td>{{ $users->email }}</td>
+                        <td>{{ $users->role }}</td>
+                        <td><i class="fa fa-key"></i></td>
+                    </tr>
+                    @endforeach
+                </tbody>
+                </table>
+                <div id="toolbar">
+                    <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Create new role</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Role Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                <input type="text" name="role" id="" class="form-control" autocomplete="off">
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        @endif
