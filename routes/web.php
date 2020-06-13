@@ -13,13 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/dashboard','TraineesController@getAllTrainees');
+Route::get('/dashboard','TraineesController@getAllTrainees')->name("Dashboard");
 Route::get('/suspend-trainee/{id}','TraineesController@suspendTrainee');
 Route::get('/approve-trainee/{id}','TraineesController@activateTrainee');
-Route::get('/',function(){
-    return redirect('/dashboard');
-});
+Route::get('/',function(){ return redirect('/dashboard');});
+Route::get('/enrollment-form',function(){
+    return view('admin_pages.enrollment_form');
+})->name("Enrollment");
+Route::get('/courses',function(){ return view('admin_pages.courses');})->name("Courses");
 Route::get('export', 'TraineesController@export');
+Route::get('/course-contents',function(){
+    return view('admin_pages.course_contents');
+})->name("Course Content");
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -9,24 +9,24 @@
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
+    <li @if(request()->route()->getName() == "Dashboard") class="nav-item active" @else class="nav-item" @endif>
         <a class="nav-link" href="/dashboard">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
     </li>
     <!-- Divider -->
     <hr class="sidebar-divider">
-    <li class="nav-item">
+    <li @if(request()->route()->getName() == "Enrollment") class="nav-item active" @else class="nav-item" @endif>
         <a class="nav-link" href="/enrollment-form">
         <i class="fa fa-file"></i>
         <span>Enrollment Form</span></a>
     </li>
-    <li class="nav-item">
+    <li @if(request()->route()->getName() == "Courses") class="nav-item active" @else class="nav-item" @endif>
         <a class="nav-link" href="/courses">
         <i class="fa fa-graduation-cap"></i>
         <span>Courses</span></a>
     </li>
-    <li class="nav-item">
+    <li @if(request()->route()->getName() == "Course Content") class="nav-item active" @else class="nav-item" @endif>
         <a class="nav-link" href="/course-contents">
         <i class="fa fa-folder"></i>
         <span>Course Contents</span></a>
