@@ -8,6 +8,7 @@ use App\Role;
 use App\Permission;
 use App\PermissionRole;
 use DB;
+use App\User;
 
 class SettingsController extends Controller
 {
@@ -17,6 +18,15 @@ class SettingsController extends Controller
             'role'=>$request->role
         ));
         return redirect('/settings');
+    }
+    public function displayUserAndRoles($id){
+        $get_selected_role = Role::paginate('10');
+        $display_user=User::join('roles','users.role_id','roles.id')
+        ->where('users.id',$id)
+        ->select('users.name','users.email','roles.role','users.id')->paginate('10');
+        $get_my_role = User::join('roles','users.role_id','roles.id')
+        ->where('users.id',$id)->select('roles.role')->value('role');
+        return view('admin_pages.user-role', compact('display_user','get_selected_role','get_my_role'));
     }
     public function displayPermissionRole($id){
         $get_selected_role = Role::where('id',$id)->get();
@@ -62,5 +72,12 @@ class SettingsController extends Controller
         $role_id = Role::where('role',request()->role_name)->value('id');
         PermissionRole::where('role_id',$role_id)->where('permission_id',$id)->delete();
         return redirect()->back()->with('message','Role unassigned successfully');
+    }
+
+    public function updateRole($id, Request $request){
+        User::where('id',$id)->update(array(
+            'role_id'=>$request->user_role
+        ));
+        return redirect('/settings');
     }
 }

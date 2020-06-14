@@ -26,12 +26,12 @@
             <div class="row">
                      <div class="col-lg-4">
                 <div class="card">
-                <div class="card-header">Role</div>
+                <div class="card-header">User</div>
                         <table class="table table-responsive table-hover">
                             <tbody>
-                            @foreach($get_selected_role as $roles)
+                            @foreach($display_user as $user)
                                 <tr>
-                                <td>{{$roles->role}}</td>
+                                <td>{{$user->name}}</td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -40,43 +40,41 @@
                      </div>
                      <div class="col-lg-8">
                      <div class="card">
-                     <div class="card-header">Permissions</div>
-                        <table class="table table-hover table-responsive">
-                            <thead>
-                                <tr>
-                                <th scope="col">No.</th>
-                                <th scope="col">Permission</th>
-                                <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @if ($display_permission_roles->currentPage() > 1)
-                                @php($i =  1 + (($display_permission_roles->currentPage() - 1) * $display_permission_roles->perPage()))
-                                @else
-                                @php($i = 1)
-                                @endif
-                                @foreach ($display_permission_roles as $permission)
-                                <tr>
-                                <th scope="row">{{ $i++ }}</th>
-                                <td>{{$permission->permission}}</td>
-                                <form action="/unsign-permission/{{$permission->id}}" method="POST">
-                                    @csrf
-                                    <td>
-                                    <button class="btn btn-primary" type="submit"><span class="text-white">Remove</span></button>
-                                    </td>
-                                </form>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        @if(isset($search_query))
-                        {{ $display_permission_roles->appends(['name' => $search_query])->links() }}
-                        @else
-                        {{ $display_permission_roles->links() }}
-                        @endif
-                        <div class="">
-                        <a href="/display-checkboxes/{{ request()->route()->id}}" button class="btn btn-success">Add Permission</button></a>
-                        </div>
+                     <div class="card-header">Roles </div>
+                     <form class="form-horizontal mt-3" action="/assign-roles/{{request()->route()->id}}" method="get">
+                                @csrf
+                                <div class="card-body table-responsive no-padding">
+                                <div class="form-group row">
+                                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                                    <div class="form-group row">
+                                        <ul class="list-unstyled col-lg-12 col-md-12 col-xs-12 col-sm-12" id="myDiv">
+                                            @if ($get_selected_role->currentPage() > 1)
+                                            @php($i =  1 + (($get_selected_role->currentPage() - 1) * $get_selected_role->perPage()))
+                                            @else
+                                            @php($i = 1)
+                                            @endif
+                                            @foreach($get_selected_role as $picking_from_database)
+                                            <div class="checkbox">
+                                                <label>
+                                                <input type="radio" class="checkbox checkbox-primary" name="user_role" value="{{$picking_from_database->id}}" @if($picking_from_database->role == $get_my_role ) checked @endif/> {{ $picking_from_database->role }}
+                                                </label>
+                                            </div>
+                                            @endforeach
+                                            @if(isset($search_query))
+                                        {{ $get_selected_role->appends(['name' => $search_query])->links() }}
+                                        @else
+                                        {{ $get_selected_role->links() }}
+                                        @endif
+                                        </ul>
+                                    </div>
+                                    <div class="form-group row">
+                                        <button type="button" class="btn btn-warning mr-1"><a href="/settings" style="color:white;">Back</a></button>
+                                        
+                                        <button type="submit" class="btn btn-primary ">Save</button>
+                                    </div>
+                                </div>
+                                </div>
+                        </form>
                         </div>
                      </div>
                     </div>

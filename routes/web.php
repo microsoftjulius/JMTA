@@ -41,17 +41,24 @@ Route::get('/course-contents/{id}',function($id){
 })->name("Course Content");
 Route::get('/settings',function(){
     $all_users = DB::table('users')
-    ->join('roles','users.role_id','users.id')
+    ->join('roles','users.role_id','roles.id')
     ->select('users.name','users.email','roles.role','users.id')->get();
-    $display_roles=DB::table('roles')->where('status','active')->get();
-    return view('admin_pages.settings',compact('all_users','display_roles'));
+    return view('admin_pages.settings',compact('all_users'));
 })->name("Settings");
+Route::get('/user-and-roles/{id}', function($id){
+    
+    $display_roles=DB::table('users')->join('roles','users.role_id','roles.id')->where('users.id',$id)->get();
+    return $display_roles;
+});
 Route::get('/save-role','SettingsController@createRole');
 Route::get('/display-permission-role/{id}','SettingsController@displayPermissionRole')->name('Permission Role');
+Route::get('/display-user-and-roles/{id}','SettingsController@displayUserAndRoles')->name('user and Roles');
 Route::get('/display-role/{role_name}','SettingsController@displayRoles')->name('Roles');
 Route::get('/display-checkboxes/{role_name}','SettingsController@displayCheckboxes')->name('Permission Checkboxes');
 Route::get('/assign-permissions/{role_name}','SettingsController@assign_roles');
 Route::get('unsign-permission/{id}','SettingsController@unSignPermission');
+Route::get('/update-role','SettingsController@updateRole');
+Route::get('/assign-roles/{id}','SettingsController@updateRole');
 });
 Auth::routes();
 
