@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     @include('accounts_layouts.header')
-    <body id="page-top">
+    <body id="page-top" >
         <!-- Page Wrapper -->
         <div id="wrapper">
         @include('accounts_layouts.sidebar')
