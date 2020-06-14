@@ -23,8 +23,7 @@
                         <div class="br-pagebody">
                         @include('layouts.messages')
                             <div class="br-section-wrapper">
-                            <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-t-6 mg-b-10">Enrolment form for Kingdom Dynamics</h6>
-                            <p class="mg-b-30 tx-gray-600">Please fill the following form to register as a trainee.</p>
+                            <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-t-6 mg-b-10">Enrolment form for {{ $course_name }}</h6>
                     
                             <div class="form-layout form-layout-1">
                                 <div class="row">
@@ -169,23 +168,7 @@
             <i class="fas fa-angle-up"></i>
             </a>
             <!-- Logout Modal-->
-            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <a class="btn btn-primary" href="login.html">Logout</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @include('admin_pages.logoutmodal');
             @include('accounts_layouts.footer')
         </body>
     </html>
