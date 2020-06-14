@@ -101,8 +101,10 @@ tr:nth-child(even) {background-color: #f2f2f2;}
                     <tr>
                         <td>{{ $users->name }}</td>
                         <td>{{ $users->email }}</td>
-                        <td>{{ $users->role }}</td>
-                        <td><i class="fa fa-key"></i></td>
+                        <td ><a href="/display-role/{{ $users->role}}">{{ $users->role }}</a></td>
+                        <td>
+                        <button type="button" data-toggle="modal" data-target="#exampleModal2" class="btn btn-sm btn-light"><i class="fa fa-key"></i></button>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -114,11 +116,12 @@ tr:nth-child(even) {background-color: #f2f2f2;}
             </div>
         </div>
         <!-- Modal -->
+        <form action="/save-role" method="get">
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Role Title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Select Role</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -128,9 +131,36 @@ tr:nth-child(even) {background-color: #f2f2f2;}
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
             </div>
         </div>
+        </form>
+        <!--modal to view roles-->
+        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel2">Select Role</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                @foreach($display_roles as $roles)
+                <div class="custom-control custom-radio">
+                    <input type="radio" class="custom-control-input" id="defaultUnchecked" name="defaultExampleRadios">
+                    <label class="custom-control-label" for="defaultUnchecked" checked>{{$roles->role}}</label>
+                    </div>
+                    @endforeach
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        <!--End view roles modal-->
         @endif
