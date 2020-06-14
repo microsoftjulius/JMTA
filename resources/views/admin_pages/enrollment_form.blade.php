@@ -21,7 +21,7 @@
                         <form action="/create-new-account" method="POST">
                             @csrf
                         <div class="br-pagebody">
-                        {{-- @include('layouts.messages') --}}
+                        @include('layouts.messages')
                             <div class="br-section-wrapper">
                             <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-t-6 mg-b-10">Enrolment form for Kingdom Dynamics</h6>
                             <p class="mg-b-30 tx-gray-600">Please fill the following form to register as a trainee.</p>
@@ -89,7 +89,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group bd-t-0-force">
                                     <label class="form-control-label">Email address: <span class="tx-danger">*</span></label>
-                                    <input class="form-control" type="email" value="" name="email_address" readonly>
+                                    <input class="form-control" type="email" value="{{ auth()->user()->email }}" name="email_address" readonly>
                                     </div>
                                 </div><!-- col-8 -->
                                 <div class="col-md-4">
@@ -136,7 +136,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group bd-t-0-force">
                                     <label class="form-control-label">Payment method: <span class="tx-danger">*</span></label>
-                                    <select class="form-control" required>
+                                    <select class="form-control" name="payment_method" required>
                                         <option value=""></option>
                                         <option value="Cash">Cash</option>
                                         <option value="Mobile Money">Mobile Money</option>

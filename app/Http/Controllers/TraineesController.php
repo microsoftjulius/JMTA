@@ -56,7 +56,16 @@ class TraineesController extends Controller
 
         $suspended_employees = DB::table('trainees')->where('status','suspended')->count();
         $trainees_count   = DB::table('trainees')->count();
-        return view('admin_pages.dashboard',compact('trainees','paid_employees','pending_employees','suspended_employees','trainees_count'));
+        if(auth()->user()->role == 'admin'){
+            return view('admin_pages.dashboard',compact('trainees','paid_employees','pending_employees','suspended_employees','trainees_count'));
+        }
+        else{
+            if(DB::table('trainees')->where('email_address',auth()->user()->email)->exists()){
+                return redirect('/course-contents');
+            }else{
+                return redirect('/courses');
+            }
+        }
     }
     /**
      * A trainee is a person who has created an account with us.
@@ -83,6 +92,7 @@ class TraineesController extends Controller
         $trainee->occupation     = request()->occupation;
         $trainee->course_id      = request()->course_id;
         $trainee->status         = 'pending';
+        $trainee->payment_method = request()->payment_method;   
         $trainee->save();
         return redirect()->back()->with('message','Thank you for filling the enrollment form, once a payment has been recieved, you will be able to access the course lessons');
     }
@@ -148,6 +158,10 @@ class TraineesController extends Controller
             return redirect()->back()->withInput()->withErrors('Country is required before you continue');
         }
         
+        if(empty(request()->payment_method)){
+            return redirect()->back()->withInput()->withErrors('Please select a payment method to continue');
+        }
+
         if(empty(request()->state)){
             return redirect()->back()->withInput()->withErrors('State is required before you continue');
         }

@@ -16,11 +16,11 @@
     </li>
     <!-- Divider -->
     <hr class="sidebar-divider">
-    <li @if(request()->route()->getName() == "Enrollment") class="nav-item active" @else class="nav-item" @endif>
+    {{-- <li @if(request()->route()->getName() == "Enrollment") class="nav-item active" @else class="nav-item" @endif>
         <a class="nav-link" href="/enrollment-form">
         <i class="fa fa-file"></i>
         <span>Enrollment Form</span></a>
-    </li>
+    </li> --}}
     <li @if(request()->route()->getName() == "Courses") class="nav-item active" @else class="nav-item" @endif>
         <a class="nav-link" href="/courses">
         <i class="fa fa-graduation-cap"></i>

@@ -18,30 +18,16 @@
                     </div>
                     <!-- Content Row -->
                     <div class="row">
+                        @foreach($all_courses as $courses)
                         <div class="col-lg-4">
                             <div class="card" style="width: 18rem;height:240px">
                                 <img src="http://jmtrumpetacademy.com/course_banners/KINGDOM-DYNAMICS-AD.jpg" class="card-img-top" alt="...">
                                 <div class="card-body">
-                                <p class="card-text">Course Name: <a href="/enrollment-form">Kingdom Dynamics 101</a></p>
+                                <p class="card-text">Course Name: <a href="/enrollment-form/{{ $courses->id }}">{{ $courses->course_name }}</a></p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4">
-                            <div class="card" style="width: 18rem; height:240px">
-                                <img src="https://www.destinyh2020andbeyond.eu/wp-content/themes/destiny/images/Logo-DESTINY.png" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="card" style="width: 18rem;height:240px">
-                                <img src="https://www.destinyh2020andbeyond.eu/wp-content/themes/destiny/images/Logo-DESTINY.png" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div><br>
                     <div class="row">
                         <div class="col-lg-4">
