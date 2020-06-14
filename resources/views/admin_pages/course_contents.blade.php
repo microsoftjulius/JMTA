@@ -20,18 +20,19 @@
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <select name="" id="" class="form-control">
+                        {{-- <select name="" id="" class="form-control">
                             <option value=""></option>
                             @foreach ($course_contents as $lesson)
                                 <option value="{{ $lesson->id }}">{{ $lesson->content }}</option>
                             @endforeach
-                        </select>
+                        </select> --}}
+                        <a href="/course-contents/1">Show all videos</a>
                     </div>
                 </div>
                 <!-- Content Row -->
                 <div class="container">
                     <div class="row">
-                        <table class="table table-borderless">
+                        <table class="table table-borderless table-responsive">
                             <thead>
                             <tr>
                                 <th colspan="2">Playing Video Course name</th>
@@ -40,42 +41,48 @@
                             </thead>
                             <tbody>
                             <tr>
+                                @foreach ($get_first_video as $item)
                                 <td colspan="2">
-                                    <div class="card" style="width: 700px; height:340px">
-                                        <iframe width="100%" height="340px"
-                                        src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                                        </iframe>
+                                    <div class="card" style="width: 700px; height:440px">
+                                    <video width="100%" height="100%" controls>
+                                        <source src="{{URL::asset("/videos/$item->content")}}" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <h5>Course Name: {{ $item->course_name }}</h5> 
+                                    <h5>Description: {{ $item->content }}</h5>
                                     </div>
-                                    <h3>Course Name:</h3> This is the Course name
-                                    <h3>Description:</h3>This is the course description
                                 </td>
-                                <td><div class="card" style="width: 18rem; height:340px">
-                                    <iframe width="100%" height="340px"
-                                        src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                                        </iframe>
-                                </div></td>
+                                @endforeach
+                                @foreach ($get_second_video as $item)
+                                <td>
+                                    <a href="/course-contents/{{ $item->id }}">
+                                        <div class="card" style="width: 18rem; height:440px">
+                                            <video width="100%" height="100%" controls>
+                                                <source src="{{URL::asset("/videos/$item->content")}}" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                    </a>
+                                </td>
+                                @endforeach
                             </tr>
+                            @foreach ($get_other_videos as $lesson)
                             <tr>
                                 <td colspan="2"></td>
                                 <td><div class="card" style="width: 18rem; height:240px">
-                                    <iframe width="100%" height="340px"
-                                    src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                                    </iframe>
+                                    <a href="/course-contents/{{ $lesson->id }}">
+                                        <div class="card" style="width: 18rem; height:240px">
+                                            <video width="100%" height="100%" controls>
+                                                <source src="{{URL::asset("/videos/$lesson->content")}}" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                    </a>
                                 </div>
                                 </td>
                                 
                             </tr>
-
-                            <tr>
-                                <td colspan="2"></td>
-                                <td><div class="card" style="width: 18rem; height:240px">
-                                    <iframe width="100%" height="340px"
-                                        src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                                        </iframe>
-                                </div>
-                                </td>
-                                
-                            </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -89,23 +96,7 @@
         <i class="fas fa-angle-up"></i>
         </a>
         <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @include('admin_pages.logoutmodal');
         @include('accounts_layouts.footer')
     </body>
 </html>
