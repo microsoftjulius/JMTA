@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::group(['middleware' => ['auth']], function () {
 Route::get('/dashboard','TraineesController@getAllTrainees')->name("Dashboard");
 Route::get('/suspend-trainee/{id}','TraineesController@suspendTrainee');
 Route::get('/approve-trainee/{id}','TraineesController@activateTrainee');
@@ -29,6 +30,7 @@ Route::get('/settings',function(){
     $all_users = DB::table('users')->get();
     return view('admin_pages.settings',compact('all_users'));
 })->name("Settings");
+});
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
