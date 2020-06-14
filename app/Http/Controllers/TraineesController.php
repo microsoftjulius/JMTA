@@ -28,7 +28,7 @@ class TraineesController extends Controller
     }
 
     protected function getCourseContentPage(){
-        if(Auth::user()->role == 'admin'){
+        if(Auth::user()->role_id == '2'){
             $course_content = Content::get();
             return view('account_layouts.course_content',compact('course_content'));
         }if(Trainee::where('email_address',Auth::user()->email)->doesntExist()){
@@ -56,11 +56,11 @@ class TraineesController extends Controller
 
         $suspended_employees = DB::table('trainees')->where('status','suspended')->count();
         $trainees_count   = DB::table('trainees')->count();
-        if(auth()->user()->role == 'admin'){
+        if(auth()->user()->role_id == '2'){
             return view('admin_pages.dashboard',compact('trainees','paid_employees','pending_employees','suspended_employees','trainees_count'));
         }
         else{
-            if(DB::table('trainees')->where('email_address',auth()->user()->email)->exists()){
+            if(DB::table('trainees')->where('email_address',auth()->user()->email)->join('users','users.email','trainees.email_address')->where('users.role_id','!=','1')->exists()){
                 return redirect('/course-contents');
             }else{
                 return redirect('/courses');
